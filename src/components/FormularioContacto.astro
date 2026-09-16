@@ -1,0 +1,405 @@
+---
+// Sección de cierre: CTA final + formulario de captación (objetivo principal
+// del sitio) + FAQ en acordeón.
+//
+// [FORMSPREE_ENDPOINT]: reemplazar por el endpoint real, ej.
+//   https://formspree.io/f/xxxxabcd
+//
+// Alternativa con EmailJS (en vez de Formspree):
+// 1) npm install @emailjs/browser
+// 2) Reemplazar el bloque fetch() del script de este componente por:
+//      import emailjs from '@emailjs/browser';
+//      await emailjs.send(
+//        '[EMAILJS_SERVICE_ID]',
+//        '[EMAILJS_TEMPLATE_ID]',
+//        Object.fromEntries(formData),
+//        { publicKey: '[EMAILJS_PUBLIC_KEY]' }
+//      );
+// 3) Quitar el fetch a Formspree y el header Accept: application/json.
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/[FORMSPREE_ENDPOINT]';
+
+const faqs = [
+  {
+    pregunta: '¿Sirve en cualquier pantalla?',
+    respuesta:
+      'La solución está validada para pantallas LCD con retroiluminación LED, que son el estándar en monitores y notebooks corporativos actuales. En el diagnóstico previo confirmamos la compatibilidad de cada equipo.',
+  },
+  {
+    pregunta: '¿Se ve mal desde adentro?',
+    respuesta:
+      'No. Desde el interior del espacio, tanto el vidrio como las pantallas se perciben con total normalidad, sin oscurecimiento, reflejo ni distorsión de color.',
+  },
+  {
+    pregunta: '¿Daña el vidrio?',
+    respuesta:
+      'No. Es una lámina de aplicación superficial, no invasiva, que no requiere perforar, cortar ni reemplazar el vidrio existente. El proceso es reversible.',
+  },
+  {
+    pregunta: '¿Ustedes hacen la instalación?',
+    respuesta:
+      'Sí. El servicio incluye diagnóstico, cotización e instalación a cargo de un equipo técnico propio, no se entrega el material para autoinstalación.',
+  },
+];
+---
+
+<section id="contacto" class="contacto section">
+  <div class="container contacto__grid">
+    <div class="contacto__intro reveal">
+      <p class="eyebrow">Contacto</p>
+      <h2 class="section-title">Protejamos la información que se ve en tus pantallas</h2>
+      <p class="section-lead">
+        Completá el formulario y coordinamos un diagnóstico para tu oficina. Te
+        contactamos para definir alcance, plazos y cotización.
+      </p>
+
+      <div class="faq" id="faq">
+        <h3 class="faq__title">Preguntas frecuentes</h3>
+        {faqs.map((faq, i) => (
+          <div class="faq__item">
+            <h4>
+              <button
+                class="faq__question"
+                type="button"
+                aria-expanded="false"
+                aria-controls={`faq-panel-${i}`}
+                id={`faq-header-${i}`}
+              >
+                <span>{faq.pregunta}</span>
+                <svg class="faq__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                  <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+              </button>
+            </h4>
+            <div
+              class="faq__panel"
+              id={`faq-panel-${i}`}
+              role="region"
+              aria-labelledby={`faq-header-${i}`}
+              hidden
+            >
+              <p>{faq.respuesta}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="contacto__form-wrap reveal">
+      <form
+        class="form"
+        id="lead-form"
+        data-endpoint={FORMSPREE_ENDPOINT}
+        novalidate
+      >
+        <div class="form__row">
+          <label for="nombre">Nombre <span aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required aria-describedby="error-nombre" />
+          <p class="form__error" id="error-nombre" role="alert"></p>
+        </div>
+
+        <div class="form__row">
+          <label for="empresa">Empresa <span aria-hidden="true">*</span></label>
+          <input type="text" id="empresa" name="empresa" autocomplete="organization" required aria-describedby="error-empresa" />
+          <p class="form__error" id="error-empresa" role="alert"></p>
+        </div>
+
+        <div class="form__row">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="error-email" />
+          <p class="form__error" id="error-email" role="alert"></p>
+        </div>
+
+        <div class="form__row">
+          <label for="telefono">Teléfono / WhatsApp <span aria-hidden="true">*</span></label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="tel" required aria-describedby="error-telefono" />
+          <p class="form__error" id="error-telefono" role="alert"></p>
+        </div>
+
+        <div class="form__row">
+          <label for="tipo-espacio">Tipo de espacio <span aria-hidden="true">*</span></label>
+          <select id="tipo-espacio" name="tipo_espacio" required aria-describedby="error-tipo-espacio">
+            <option value="">Seleccioná una opción</option>
+            <option value="Sala de reunión">Sala de reunión</option>
+            <option value="Oficina abierta">Oficina abierta</option>
+            <option value="Otro">Otro</option>
+          </select>
+          <p class="form__error" id="error-tipo-espacio" role="alert"></p>
+        </div>
+
+        <div class="form__row">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="form-submit">
+          <span id="form-submit-label">Solicitar demo o cotización</span>
+        </button>
+
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contacto {
+    background: var(--color-secundario-100);
+  }
+
+  .contacto__grid {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .faq {
+    margin-top: var(--sp-5);
+  }
+
+  .faq__title {
+    font-size: var(--fs-md);
+    margin-bottom: var(--sp-2);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--color-borde);
+  }
+
+  .faq__item h4 {
+    margin: 0;
+    font-size: var(--fs-base);
+  }
+
+  .faq__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    background: transparent;
+    border: none;
+    padding: var(--sp-2) 0;
+    text-align: left;
+    font-family: inherit;
+    font-size: var(--fs-base);
+    font-weight: 600;
+    color: var(--color-texto);
+    min-height: 44px;
+  }
+
+  .faq__icon {
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+  }
+
+  .faq__question[aria-expanded='true'] .faq__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq__panel {
+    padding-bottom: var(--sp-2);
+  }
+
+  .faq__panel p {
+    color: var(--color-secundario);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    max-width: 60ch;
+  }
+
+  .contacto__form-wrap {
+    background: var(--color-fondo);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-borde);
+    padding: var(--sp-4);
+    box-shadow: var(--shadow-md);
+    align-self: start;
+  }
+
+  .form__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-bottom: var(--sp-3);
+  }
+
+  .form__row label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--color-texto);
+  }
+
+  .form__row input,
+  .form__row select,
+  .form__row textarea {
+    min-height: 48px;
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-borde);
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    transition: border-color var(--transition-base);
+  }
+
+  .form__row textarea {
+    min-height: 96px;
+    resize: vertical;
+  }
+
+  .form__row input:hover,
+  .form__row select:hover,
+  .form__row textarea:hover {
+    border-color: var(--color-secundario);
+  }
+
+  .form__row input[aria-invalid='true'],
+  .form__row select[aria-invalid='true'],
+  .form__row textarea[aria-invalid='true'] {
+    border-color: var(--color-error);
+  }
+
+  .form__error {
+    font-size: var(--fs-sm);
+    color: var(--color-error);
+    min-height: 1.2em;
+    margin: 0;
+  }
+
+  .form__status {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-sm);
+    text-align: center;
+    min-height: 1.2em;
+  }
+
+  .form__status[data-state='success'] {
+    color: var(--color-exito);
+    font-weight: 600;
+  }
+
+  .form__status[data-state='error'] {
+    color: var(--color-error);
+    font-weight: 600;
+  }
+
+  @media (min-width: 960px) {
+    .contacto__grid {
+      grid-template-columns: 1fr 0.9fr;
+      align-items: start;
+    }
+  }
+</style>
+
+<script>
+  // ------------------------------------------------------------------
+  // FAQ acordeón
+  // ------------------------------------------------------------------
+  const faqButtons = document.querySelectorAll<HTMLButtonElement>('.faq__question');
+  faqButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const panelId = btn.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (panel) panel.hidden = expanded;
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // Formulario de captación de leads
+  // ------------------------------------------------------------------
+  const form = document.getElementById('lead-form') as HTMLFormElement | null;
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = document.getElementById('form-submit') as HTMLButtonElement | null;
+  const submitLabel = document.getElementById('form-submit-label');
+
+  const requiredFields = ['nombre', 'empresa', 'email', 'telefono', 'tipo_espacio'];
+
+  function validarEmail(valor: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+  }
+
+  function limpiarErrores(form: HTMLFormElement) {
+    form.querySelectorAll('.form__error').forEach((el) => {
+      el.textContent = '';
+    });
+    form.querySelectorAll('[aria-invalid]').forEach((el) => {
+      el.removeAttribute('aria-invalid');
+    });
+  }
+
+  function mostrarError(form: HTMLFormElement, campo: string, mensaje: string) {
+    const input = form.elements.namedItem(campo) as HTMLElement | null;
+    const errorId = `error-${campo === 'tipo_espacio' ? 'tipo-espacio' : campo}`;
+    const errorEl = document.getElementById(errorId);
+    if (errorEl) errorEl.textContent = mensaje;
+    if (input) input.setAttribute('aria-invalid', 'true');
+  }
+
+  function validarFormulario(form: HTMLFormElement) {
+    limpiarErrores(form);
+    let esValido = true;
+
+    requiredFields.forEach((campo) => {
+      const input = form.elements.namedItem(campo) as HTMLInputElement | HTMLSelectElement | null;
+      if (!input || !input.value.trim()) {
+        mostrarError(form, campo, 'Este campo es obligatorio.');
+        esValido = false;
+      }
+    });
+
+    const emailInput = form.elements.namedItem('email') as HTMLInputElement | null;
+    if (emailInput && emailInput.value.trim() && !validarEmail(emailInput.value.trim())) {
+      mostrarError(form, 'email', 'Ingresá un email válido.');
+      esValido = false;
+    }
+
+    return esValido;
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form || !statusEl || !submitBtn || !submitLabel) return;
+
+    if (!validarFormulario(form)) {
+      statusEl.dataset.state = 'error';
+      statusEl.textContent = 'Revisá los campos marcados antes de continuar.';
+      return;
+    }
+
+    const endpoint = form.dataset.endpoint;
+    const formData = new FormData(form);
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Enviando...';
+    statusEl.dataset.state = '';
+    statusEl.textContent = '';
+
+    try {
+      // --- Envío con Formspree (por defecto) ---
+      const response = await fetch(endpoint ?? '', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      // --- Envío alternativo con EmailJS: reemplazar el bloque de arriba por
+      // el código comentado al inicio de este componente.
+
+      if (response.ok) {
+        statusEl.dataset.state = 'success';
+        statusEl.textContent = '¡Gracias! Te contactamos en breve.';
+        form.reset();
+      } else {
+        throw new Error('Respuesta no exitosa del servidor');
+      }
+    } catch (error) {
+      statusEl.dataset.state = 'error';
+      statusEl.textContent = 'No pudimos enviar tu consulta. Intentá nuevamente o escribinos por WhatsApp.';
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Solicitar demo o cotización';
+    }
+  });
+</script>

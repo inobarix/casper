@@ -1,0 +1,147 @@
+---
+// Stepper del servicio. Refuerza que se entrega la solución instalada, no
+// solo el material.
+const pasos = [
+  {
+    numero: '01',
+    titulo: 'Diagnóstico',
+    texto: 'Relevamos los vidrios a intervenir y el nivel de exposición visual de cada puesto o sala.',
+  },
+  {
+    numero: '02',
+    titulo: 'Cotización',
+    texto: 'Definimos superficie, tipo de vidrio y alcance del proyecto en una propuesta cerrada.',
+  },
+  {
+    numero: '03',
+    titulo: 'Instalación',
+    texto: 'Un equipo técnico especializado aplica la solución en el sitio, sin obra ni reemplazo de mamparas.',
+  },
+  {
+    numero: '04',
+    titulo: 'Listo',
+    texto: 'El espacio queda protegido de forma permanente, sin configuración ni mantenimiento posterior.',
+  },
+];
+---
+
+<section class="servicio section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Cómo funciona</p>
+      <h2 class="section-title">Un servicio integral, no un producto suelto</h2>
+      <p class="section-lead">
+        No vendemos solo la lámina: gestionamos todo el proceso, desde el relevamiento
+        hasta la instalación final a cargo de un equipo profesional.
+      </p>
+    </div>
+
+    <ol class="stepper">
+      {pasos.map((paso, i) => (
+        <li class="stepper__item reveal">
+          <div class="stepper__marker">
+            <span class="stepper__number">{paso.numero}</span>
+            {i < pasos.length - 1 && <span class="stepper__line" aria-hidden="true" />}
+          </div>
+          <div class="stepper__content">
+            <h3>{paso.titulo}</h3>
+            <p>{paso.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .servicio {
+    background: var(--color-primario);
+    color: var(--color-texto-invertido);
+  }
+
+  .servicio .eyebrow {
+    color: var(--color-acento);
+  }
+
+  .servicio .section-lead {
+    color: rgba(248, 250, 252, 0.7);
+  }
+
+  .stepper {
+    display: grid;
+    gap: var(--sp-4);
+    grid-template-columns: 1fr;
+    counter-reset: paso;
+  }
+
+  .stepper__item {
+    display: flex;
+    gap: var(--sp-3);
+  }
+
+  .stepper__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stepper__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(34, 211, 238, 0.12);
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    color: var(--color-acento);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    flex-shrink: 0;
+  }
+
+  .stepper__line {
+    flex: 1;
+    width: 1px;
+    min-height: 32px;
+    background: rgba(248, 250, 252, 0.15);
+    margin-top: var(--sp-1);
+  }
+
+  .stepper__content h3 {
+    font-size: var(--fs-md);
+    margin-bottom: var(--sp-1);
+  }
+
+  .stepper__content p {
+    color: rgba(248, 250, 252, 0.7);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    max-width: 52ch;
+  }
+
+  @media (min-width: 860px) {
+    .stepper {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stepper__item {
+      flex-direction: column;
+    }
+
+    .stepper__marker {
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .stepper__line {
+      height: 1px;
+      min-height: 0;
+      width: 100%;
+      margin-top: 0;
+      margin-left: var(--sp-1);
+      align-self: center;
+    }
+  }
+</style>

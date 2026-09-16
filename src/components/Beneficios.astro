@@ -1,0 +1,124 @@
+---
+// Grid de beneficios clave. Íconos como SVG inline (sin dependencias externas).
+const beneficios = [
+  {
+    titulo: 'Protección de datos confidenciales',
+    texto: 'Evita que información sensible en pantalla quede expuesta a la vista de terceros en espacios de circulación.',
+    icon: 'shield',
+  },
+  {
+    titulo: 'No altera la estética ni la luz',
+    texto: 'El vidrio conserva su transparencia y el ambiente mantiene su iluminación natural, sin efecto espejo ni oscurecimiento.',
+    icon: 'sun',
+  },
+  {
+    titulo: 'Cumplimiento para sectores regulados',
+    texto: 'Refuerza políticas de confidencialidad en entornos financieros, legales y de seguridad de la información.',
+    icon: 'check',
+  },
+  {
+    titulo: 'Instalación profesional sin obra',
+    texto: 'Se aplica sobre el vidrio existente, con un equipo especializado y sin interrumpir la operación de la oficina.',
+    icon: 'tool',
+  },
+];
+
+const icons: Record<string, string> = {
+  shield:
+    '<path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  sun:
+    '<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  check:
+    '<rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  tool:
+    '<path d="M14.7 6.3a3.5 3.5 0 0 0-4.8 4l-6 6a2 2 0 1 0 2.8 2.8l6-6a3.5 3.5 0 0 0 4-4.8l-2.3 2.3-2-2 2.3-2.3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+};
+---
+
+<section id="beneficios" class="beneficios section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Beneficios</p>
+      <h2 class="section-title">Confidencialidad que se sostiene sola</h2>
+      <p class="section-lead">
+        Una solución pensada para operar de forma silenciosa: protege la información sin
+        pedirle nada a las personas que trabajan en el espacio.
+      </p>
+    </div>
+
+    <ul class="beneficios__grid">
+      {beneficios.map((b) => (
+        <li class="beneficio-card reveal">
+          <span class="beneficio-card__icon" set:html={`<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">${icons[b.icon]}</svg>`} />
+          <h3 class="beneficio-card__title">{b.titulo}</h3>
+          <p class="beneficio-card__text">{b.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .beneficios {
+    background: var(--color-secundario-100);
+  }
+
+  .beneficios__grid {
+    display: grid;
+    gap: var(--sp-3);
+    grid-template-columns: 1fr;
+  }
+
+  .beneficio-card {
+    background: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-4);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .beneficio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .beneficio-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(34, 211, 238, 0.12);
+    color: var(--color-acento-600);
+    margin-bottom: var(--sp-2);
+  }
+
+  .beneficio-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .beneficio-card__title {
+    font-size: var(--fs-md);
+    margin-bottom: var(--sp-1);
+  }
+
+  .beneficio-card__text {
+    color: var(--color-secundario);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+  }
+
+  @media (min-width: 620px) {
+    .beneficios__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .beneficios__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

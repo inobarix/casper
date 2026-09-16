@@ -1,0 +1,136 @@
+---
+// Sección: el riesgo (visual hacking) + presentación de la solución.
+// [IMG_ADENTRO] / [IMG_AFUERA]: reemplazar los bloques comparativos por
+// fotografía real cuando esté disponible (recomendado 800x600px, .jpg/.webp).
+// Mientras tanto se usa una composición CSS/SVG equivalente a la del hero,
+// en un formato más editorial para esta sección.
+---
+
+<section id="que-es" class="problema section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">El riesgo</p>
+      <h2 class="section-title">La información también se filtra por la vista</h2>
+      <p class="section-lead">
+        En oficinas con paredes y puertas de vidrio, cualquier persona que pase por un
+        pasillo, una sala de espera o un espacio público puede leer lo que hay en una
+        pantalla sin necesidad de acceder a ningún sistema. Es una vulnerabilidad física,
+        no informática, y suele quedar fuera de las políticas de seguridad tradicionales.
+      </p>
+    </div>
+
+    <div class="comparativa reveal">
+      <figure class="comparativa__item">
+        <div class="comparativa__frame comparativa__frame--in" aria-hidden="true">
+          <svg viewBox="0 0 160 110" width="100%" role="presentation">
+            <rect x="6" y="6" width="148" height="98" rx="8" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/>
+            <rect x="20" y="20" width="80" height="52" rx="4" fill="#0f2a3d"/>
+            <rect x="28" y="28" width="64" height="6" rx="2" fill="#22d3ee"/>
+            <rect x="28" y="40" width="50" height="4" rx="2" fill="#5fd8ec"/>
+            <rect x="28" y="48" width="40" height="4" rx="2" fill="#5fd8ec"/>
+            <rect x="28" y="56" width="56" height="4" rx="2" fill="#5fd8ec"/>
+            <circle cx="128" cy="46" r="11" fill="#94a3b8"/>
+            <path d="M112 86c0-11 7-19 16-19s16 8 16 19" fill="#94a3b8"/>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="comparativa__badge comparativa__badge--ok">Desde adentro</span>
+          <p>El ambiente se ve con total normalidad: personas, muebles e iluminación intactos.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="comparativa__item">
+        <div class="comparativa__frame comparativa__frame--out" aria-hidden="true">
+          <svg viewBox="0 0 160 110" width="100%" role="presentation">
+            <rect x="6" y="6" width="148" height="98" rx="8" fill="#0b1220" stroke="#1e293b" stroke-width="1.5"/>
+            <rect x="20" y="20" width="80" height="52" rx="4" fill="#000000"/>
+            <circle cx="128" cy="46" r="11" fill="#475569"/>
+            <path d="M112 86c0-11 7-19 16-19s16 8 16 19" fill="#475569"/>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="comparativa__badge comparativa__badge--dark">Desde afuera</span>
+          <p>La pantalla se oculta por completo. El resto del espacio se sigue viendo igual.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="problema__solucion reveal">
+      <h3>La solución es física, no un software</h3>
+      <p>
+        Se trata de una lámina de aplicación profesional sobre el vidrio existente, sin
+        obra ni reemplazo de mamparas. Funciona de forma pasiva sobre pantallas LCD con
+        retroiluminación LED: no requiere configuración, mantenimiento ni depende de que
+        alguien la active.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparativa {
+    display: grid;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-5);
+  }
+
+  .comparativa__item {
+    margin: 0;
+    background: var(--color-secundario-100);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-3);
+  }
+
+  .comparativa__frame {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--sp-2);
+  }
+
+  .comparativa__badge {
+    display: inline-block;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    margin-bottom: var(--sp-1);
+  }
+
+  .comparativa__badge--ok {
+    background: rgba(34, 211, 238, 0.15);
+    color: var(--color-acento-600);
+  }
+
+  .comparativa__badge--dark {
+    background: rgba(15, 23, 42, 0.1);
+    color: var(--color-primario);
+  }
+
+  .comparativa__item p {
+    color: var(--color-secundario);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+  }
+
+  .problema__solucion {
+    max-width: 68ch;
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--color-borde);
+  }
+
+  .problema__solucion h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--sp-2);
+  }
+
+  .problema__solucion p {
+    color: var(--color-secundario);
+  }
+
+  @media (min-width: 720px) {
+    .comparativa {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Problema from '../components/Problema.astro';
+import Beneficios from '../components/Beneficios.astro';
+import Casos from '../components/Casos.astro';
+import ComoFunciona from '../components/ComoFunciona.astro';
+import FormularioContacto from '../components/FormularioContacto.astro';
+import WhatsappFloat from '../components/WhatsappFloat.astro';
+import Footer from '../components/Footer.astro';
+
+// --- Meta tags / SEO / Open Graph ---
+// Reemplazar todos los placeholders antes de publicar.
+const TITLE = '[NOMBRE_MARCA] | Privacidad visual para oficinas con vidrio';
+const DESCRIPTION =
+  'Protegé la información confidencial de tus pantallas en salas de reunión y oficinas con paredes de vidrio. Solución instalada por profesionales, sin obra.';
+const OG_IMAGE = '/[OG_IMAGE].jpg'; // recomendado 1200x630px
+const SITE_URL = 'https://[SITE_URL]';
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{TITLE}</title>
+    <meta name="description" content={DESCRIPTION} />
+    <link rel="canonical" href={SITE_URL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={TITLE} />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={TITLE} />
+    <meta name="twitter:description" content={DESCRIPTION} />
+    <meta name="twitter:image" content={OG_IMAGE} />
+
+    <!-- Google Fonts: Space Grotesk (títulos) + Inter (texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+
+    <Header />
+
+    <main id="contenido">
+      <Hero />
+      <Problema />
+      <Beneficios />
+      <Casos />
+      <ComoFunciona />
+      <FormularioContacto />
+    </main>
+
+    <Footer />
+    <WhatsappFloat />
+
+    <script>
+      // Reveal on scroll — sutil, aplica a cualquier elemento .reveal de la
+      // página. Respeta prefers-reduced-motion (ver global.css).
+      const elementos = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window && elementos.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        elementos.forEach((el) => observer.observe(el));
+      } else {
+        elementos.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>
