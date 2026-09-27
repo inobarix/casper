@@ -1,0 +1,28 @@
+---
+// Logo de Invista: cuadrado blanco + nombre en Helvetica. Se arma con CSS
+// (no imagen) para que escale nítido y tome el color del texto.
+---
+
+<span class="logo">
+  <span class="logo__mark" aria-hidden="true"></span>Invista
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.1em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .logo__mark {
+    display: inline-block;
+    width: 0.66em;
+    height: 0.73em;
+    border-radius: 0.05em;
+    background: currentColor;
+  }
+</style>

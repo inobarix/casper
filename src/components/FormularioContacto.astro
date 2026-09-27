@@ -2,22 +2,12 @@
 // Sección de cierre: CTA final + formulario de captación (objetivo principal
 // del sitio) + FAQ en acordeón.
 //
-// [FORMSPREE_ENDPOINT]: reemplazar por el endpoint real, ej.
-//   https://formspree.io/f/xxxxabcd
-//
-// Alternativa con EmailJS (en vez de Formspree):
-// 1) npm install @emailjs/browser
-// 2) Reemplazar el bloque fetch() del script de este componente por:
-//      import emailjs from '@emailjs/browser';
-//      await emailjs.send(
-//        '[EMAILJS_SERVICE_ID]',
-//        '[EMAILJS_TEMPLATE_ID]',
-//        Object.fromEntries(formData),
-//        { publicKey: '[EMAILJS_PUBLIC_KEY]' }
-//      );
-// 3) Quitar el fetch a Formspree y el header Accept: application/json.
-
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/[FORMSPREE_ENDPOINT]';
+// Las consultas se envían por email con FormSubmit (formsubmit.co), sin
+// backend ni cuenta. La primera vez que alguien envíe el formulario, FormSubmit
+// manda un mail de activación a EMAIL_DESTINO: hay que confirmarlo una sola vez
+// para empezar a recibir las consultas.
+const EMAIL_DESTINO = 'invistalat@gmail.com';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${EMAIL_DESTINO}`;
 
 const faqs = [
   {
@@ -89,9 +79,14 @@ const faqs = [
       <form
         class="form"
         id="lead-form"
-        data-endpoint={FORMSPREE_ENDPOINT}
+        data-endpoint={FORM_ENDPOINT}
         novalidate
       >
+        <input type="hidden" name="_subject" value="Nueva consulta desde la web de Invista" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
+
         <div class="form__row">
           <label for="nombre">Nombre <span aria-hidden="true">*</span></label>
           <input type="text" id="nombre" name="nombre" autocomplete="name" required aria-describedby="error-nombre" />
@@ -377,17 +372,14 @@ const faqs = [
     statusEl.textContent = '';
 
     try {
-      // --- Envío con Formspree (por defecto) ---
       const response = await fetch(endpoint ?? '', {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       });
+      const data = await response.json().catch(() => null);
 
-      // --- Envío alternativo con EmailJS: reemplazar el bloque de arriba por
-      // el código comentado al inicio de este componente.
-
-      if (response.ok) {
+      if (response.ok && data?.success !== 'false' && data?.success !== false) {
         statusEl.dataset.state = 'success';
         statusEl.textContent = '¡Gracias! Te contactamos en breve.';
         form.reset();

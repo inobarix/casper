@@ -29,9 +29,9 @@
   --color-exito: #16a34a;
   --color-error: #dc2626;
 
-  /* Tipografía: 2 familias — títulos (display) y texto (body) */
-  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* Tipografía: Helvetica en títulos (display) y texto (body) */
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   /* Escala tipográfica modular (ratio ~1.25) */
   --fs-sm: 0.875rem;

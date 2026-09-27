@@ -1,26 +1,23 @@
 ---
 // Footer discreto. Reemplazar datos de contacto placeholder.
-const NOMBRE_MARCA = '[NOMBRE_MARCA]';
+import Logo from './Logo.astro';
+
+const NOMBRE_MARCA = 'Invista';
 const anioActual = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <p class="footer__logo">{NOMBRE_MARCA}</p>
+      <p class="footer__logo"><Logo /></p>
       <p class="footer__tagline">Privacidad visual para oficinas con vidrio.</p>
     </div>
 
     <ul class="footer__contact">
       <li>
-        <a href="mailto:[EMAIL_CONTACTO]">[EMAIL_CONTACTO]</a>
+        <a href="mailto:invistalat@gmail.com">invistalat@gmail.com</a>
       </li>
-      <li>[UBICACION_EMPRESA]</li>
-      <li>
-        <a href={`https://wa.me/[WHATSAPP_NUMERO]`} target="_blank" rel="noopener noreferrer">
-          [WHATSAPP_NUMERO_VISIBLE]
-        </a>
-      </li>
+      <li>CABA</li>
     </ul>
 
     <ul class="footer__links">
@@ -52,8 +49,7 @@ const anioActual = new Date().getFullYear();
 
   .footer__logo {
     font-family: var(--font-display);
-    font-size: var(--fs-md);
-    font-weight: 700;
+    font-size: 1.5rem;
     color: var(--color-texto-invertido);
     margin-bottom: var(--sp-1);
   }

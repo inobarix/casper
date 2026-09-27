@@ -1,6 +1,8 @@
 ---
-// Header / Nav sticky. [NOMBRE_MARCA]: reemplazar por el nombre real de la marca.
-const NOMBRE_MARCA = '[NOMBRE_MARCA]';
+// Header / Nav sticky.
+import Logo from './Logo.astro';
+
+const NOMBRE_MARCA = 'Invista';
 
 const navLinks = [
   { href: '#que-es', label: 'Qué es' },
@@ -13,7 +15,7 @@ const navLinks = [
 <header class="header" id="inicio">
   <div class="container header__inner">
     <a href="#inicio" class="header__logo" aria-label={`${NOMBRE_MARCA} — inicio`}>
-      {NOMBRE_MARCA}
+      <Logo />
     </a>
 
     <button
@@ -64,11 +66,9 @@ const navLinks = [
 
   .header__logo {
     font-family: var(--font-display);
-    font-size: var(--fs-md);
-    font-weight: 700;
+    font-size: 1.6rem;
     color: var(--color-texto-invertido);
     text-decoration: none;
-    letter-spacing: -0.01em;
   }
 
   .header__toggle {
