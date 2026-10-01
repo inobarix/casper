@@ -1,0 +1,12 @@
+// robots.txt que apunta al sitemap con el dominio de astro.config.mjs.
+import type { APIRoute } from 'astro';
+
+export const GET: APIRoute = ({ site }) =>
+  new Response(
+    `User-agent: *
+Allow: /
+
+Sitemap: ${new URL('/sitemap.xml', site).href}
+`,
+    { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
+  );

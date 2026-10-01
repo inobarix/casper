@@ -1,9 +1,8 @@
 import { defineConfig } from 'astro/config';
 
-// [SITE_URL]: reemplazar por el dominio final antes de publicar (se usa para
-// generar URLs absolutas de Open Graph / sitemap). Debe ser una URL válida,
-// por eso el placeholder usa un dominio de ejemplo en vez de corchetes.
+// Dominio final del sitio: se usa para las URLs absolutas de canonical,
+// Open Graph, sitemap.xml y robots.txt.
 export default defineConfig({
-  site: 'https://www.ejemplo-reemplazar.com',
+  site: 'https://invision.com.ar',
   compressHTML: true,
 });
