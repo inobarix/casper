@@ -17,6 +17,50 @@ const DESCRIPTION =
   'Protegé la información confidencial de tus pantallas en salas de reunión y oficinas con paredes de vidrio. Solución instalada por profesionales, sin obra.';
 const OG_IMAGE = '/[OG_IMAGE].jpg'; // recomendado 1200x630px
 const SITE_URL = Astro.site!.href;
+
+// Datos estructurados (schema.org) para que Google identifique la empresa y
+// el servicio. El FAQPage se genera en FormularioContacto.astro.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organizacion`,
+      name: 'Invision',
+      url: SITE_URL,
+      email: 'invistalat@gmail.com',
+      telephone: '+54 9 11 3607-1340',
+      areaServed: [
+        { '@type': 'City', name: 'Ciudad Autónoma de Buenos Aires' },
+        { '@type': 'Country', name: 'Argentina' },
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        telephone: '+54 9 11 3607-1340',
+        email: 'invistalat@gmail.com',
+        availableLanguage: 'es',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}#sitio`,
+      url: SITE_URL,
+      name: 'Invision',
+      inLanguage: 'es-AR',
+      publisher: { '@id': `${SITE_URL}#organizacion` },
+    },
+    {
+      '@type': 'Service',
+      name: 'Privacidad visual para oficinas con vidrio',
+      serviceType: 'Instalación de lámina de privacidad para pantallas en vidrios corporativos',
+      description: DESCRIPTION,
+      provider: { '@id': `${SITE_URL}#organizacion` },
+      areaServed: { '@type': 'Country', name: 'Argentina' },
+      url: SITE_URL,
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -44,6 +88,8 @@ const SITE_URL = Astro.site!.href;
     <meta name="twitter:title" content={TITLE} />
     <meta name="twitter:description" content={DESCRIPTION} />
     <meta name="twitter:image" content={OG_IMAGE} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a href="#contenido" class="skip-link">Saltar al contenido principal</a>

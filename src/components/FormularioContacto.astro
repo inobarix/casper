@@ -31,7 +31,20 @@ const faqs = [
       'Sí. El servicio incluye diagnóstico, cotización e instalación a cargo de un equipo técnico propio, no se entrega el material para autoinstalación.',
   },
 ];
+
+// Datos estructurados FAQPage, generados desde las mismas preguntas visibles.
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.pregunta,
+    acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
 <section id="contacto" class="contacto section">
   <div class="container contacto__grid">
