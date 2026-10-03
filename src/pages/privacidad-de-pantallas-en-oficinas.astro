@@ -2,33 +2,8 @@
 // Guía pillar: privacidad de pantallas en oficinas / visual hacking.
 // Pensada para búsquedas informacionales y para ser citada por motores de
 // respuesta (definiciones cortas, tabla comparativa y FAQ con schema).
-import '../styles/global.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import WhatsappFloat from '../components/WhatsappFloat.astro';
-
-const TITLE = 'Privacidad de pantallas en oficinas | Guía anti visual hacking';
-const DESCRIPTION =
-  'Cómo evitar que vean las pantallas de tu oficina desde afuera. Qué es el visual hacking y cómo funciona el film de ocultación para vidrios. Guía completa.';
-const H1 = 'Privacidad de pantallas en la oficina: cómo proteger tu información del visual hacking';
-
-// Actualizar cada vez que se revise el contenido (se muestra en la página y
-// en el schema Article).
-const FECHA_PUBLICACION = '2026-10-03';
-const FECHA_ACTUALIZACION = '2026-10-03';
-
-const SITE_URL = Astro.site!.href;
-const PAGE_URL = new URL(Astro.url.pathname, Astro.site).href;
-const IMAGEN = '/img/pantalla-oculta-vidrio.svg';
-const IMAGEN_ALT =
-  'Monitor que se ve negro desde afuera de una sala de vidrio con film de ocultación';
-const OG_IMAGE = '/[OG_IMAGE].jpg'; // mismo placeholder que el home; recomendado 1200x630px
-
-const fechaVisible = new Date(`${FECHA_ACTUALIZACION}T12:00:00`).toLocaleDateString('es-AR', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
+// Enlaza a los artículos satélite y ellos enlazan de vuelta acá.
+import GuiaLayout from '../layouts/GuiaLayout.astro';
 
 const indice = [
   { id: 'que-es-visual-hacking', label: 'Qué es el visual hacking' },
@@ -37,26 +12,6 @@ const indice = [
   { id: 'film-de-ocultacion', label: 'Cómo funciona el film de ocultación' },
   { id: 'para-quien-es', label: 'Para quién es' },
   { id: 'instalacion', label: 'Instalación' },
-  { id: 'preguntas-frecuentes', label: 'Preguntas frecuentes' },
-];
-
-const riesgos = [
-  {
-    titulo: 'Salas de reunión con paredes de vidrio',
-    texto: 'el monitor de la videollamada o la presentación se ve desde el pasillo.',
-  },
-  {
-    titulo: 'Oficinas sobre la calle o con ventanales',
-    texto: 'las pantallas quedan expuestas hacia afuera.',
-  },
-  {
-    titulo: 'Espacios de atención al cliente',
-    texto: 'el público ve la pantalla del operador.',
-  },
-  {
-    titulo: 'Áreas sensibles',
-    texto: '(finanzas, legales, RR.HH., seguridad de la información) con tabiques vidriados.',
-  },
 ];
 
 const comparativa = [
@@ -83,8 +38,6 @@ const comparativa = [
   },
 ];
 
-// Las mismas preguntas alimentan el bloque visible y el schema FAQPage, para
-// que el marcado siempre coincida con el contenido de la página.
 const faqs = [
   {
     pregunta: '¿El film de ocultación sirve en cualquier pantalla?',
@@ -117,658 +70,160 @@ const faqs = [
       'El filtro va en cada pantalla y angosta su ángulo de visión; el film de ocultación va sobre el vidrio y protege todas las pantallas del espacio a la vez, sin intervenir cada equipo.',
   },
 ];
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Article',
-      '@id': `${PAGE_URL}#articulo`,
-      headline: H1,
-      description: DESCRIPTION,
-      image: new URL(IMAGEN, Astro.site).href,
-      inLanguage: 'es-AR',
-      datePublished: FECHA_PUBLICACION,
-      dateModified: FECHA_ACTUALIZACION,
-      mainEntityOfPage: PAGE_URL,
-      author: { '@id': `${SITE_URL}#organizacion` },
-      publisher: { '@id': `${SITE_URL}#organizacion` },
-      about: ['Visual hacking', 'Privacidad de pantallas', 'Film de ocultación de pantallas'],
-    },
-    {
-      '@type': 'Organization',
-      '@id': `${SITE_URL}#organizacion`,
-      name: 'Invision',
-      url: SITE_URL,
-      email: 'invistalat@gmail.com',
-      telephone: '+54 9 11 3607-1340',
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Privacidad de pantallas en oficinas', item: PAGE_URL },
-      ],
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': `${PAGE_URL}#faq`,
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.pregunta,
-        acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
-      })),
-    },
-  ],
-};
 ---
 
-<!doctype html>
-<html lang="es-AR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-
-    <title>{TITLE}</title>
-    <meta name="description" content={DESCRIPTION} />
-    <link rel="canonical" href={PAGE_URL} />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content={TITLE} />
-    <meta property="og:description" content={DESCRIPTION} />
-    <meta property="og:image" content={OG_IMAGE} />
-    <meta property="og:url" content={PAGE_URL} />
-    <meta property="og:locale" content="es_AR" />
-    <meta property="article:published_time" content={FECHA_PUBLICACION} />
-    <meta property="article:modified_time" content={FECHA_ACTUALIZACION} />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={TITLE} />
-    <meta name="twitter:description" content={DESCRIPTION} />
-    <meta name="twitter:image" content={OG_IMAGE} />
-
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  </head>
-  <body>
-    <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
-
-    <Header />
-
-    <main id="contenido">
-      <article>
-        <header class="guia-hero">
-          <div class="container guia-hero__inner">
-            <nav class="guia-breadcrumb" aria-label="Ruta de navegación">
-              <a href="/">Inicio</a>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">Guía de privacidad de pantallas</span>
-            </nav>
-
-            <p class="eyebrow">Guía</p>
-            <h1 class="guia-hero__title">{H1}</h1>
-
-            <p class="guia-hero__resumen">
-              En una oficina moderna, gran parte de la información confidencial no se filtra
-              por un hackeo informático: se filtra por la vista. Alcanza con que alguien lea un
-              monitor desde el pasillo, desde una sala de reunión con paredes de vidrio o desde
-              la vereda. A eso se lo llama <strong>visual hacking</strong>, y la forma más
-              efectiva de evitarlo sin cerrar el espacio es aplicar un <strong>film de
-              ocultación de pantallas</strong> sobre los vidrios: desde afuera los monitores se
-              ven en negro, mientras adentro todo sigue normal. En esta guía te explicamos qué
-              es el riesgo, qué soluciones existen y cómo funciona esta tecnología.
-            </p>
-
-            <p class="guia-hero__meta">
-              Por <strong>Invision</strong> · Última actualización:
-              <time datetime={FECHA_ACTUALIZACION}>{fechaVisible}</time>
-            </p>
-          </div>
-        </header>
-
-        <div class="container guia-layout">
-          <aside class="guia-indice" aria-labelledby="indice-titulo">
-            <p class="guia-indice__titulo" id="indice-titulo">En esta guía</p>
-            <ol>
-              {indice.map((item) => (
-                <li><a href={`#${item.id}`}>{item.label}</a></li>
-              ))}
-            </ol>
-          </aside>
-
-          <div class="guia-cuerpo">
-            <figure class="guia-figura">
-              <img
-                src={IMAGEN}
-                alt={IMAGEN_ALT}
-                width="1200"
-                height="675"
-                loading="eager"
-                decoding="async"
-              />
-              <figcaption>
-                Con el film de ocultación, desde afuera del vidrio se ven las personas y el
-                ambiente, pero las pantallas aparecen en negro.
-              </figcaption>
-            </figure>
-
-            <section id="que-es-visual-hacking" class="guia-seccion">
-              <h2>Qué es el visual hacking (y por qué es un riesgo real)</h2>
-              <p>
-                El <strong>visual hacking</strong> es la obtención de información sensible
-                simplemente mirando una pantalla, un escritorio o un documento ajeno. No requiere
-                conocimientos técnicos ni dejar rastro: una persona ve datos de un cliente, una
-                contraseña, un número de cuenta o una pantalla de sistema, y los memoriza o
-                fotografía.
-              </p>
-              <p>
-                Es un riesgo subestimado porque las empresas invierten en firewalls y antivirus,
-                pero dejan las pantallas a la vista de cualquiera que pase. En oficinas con mucho
-                vidrio —cada vez más comunes— el problema se multiplica: la transparencia que suma
-                estética y sensación de apertura también expone lo que hay en los monitores.
-              </p>
-            </section>
-
-            <section id="donde-esta-el-peligro" class="guia-seccion">
-              <h2>Dónde está el peligro en una oficina moderna</h2>
-              <p>
-                El riesgo se concentra donde una pantalla queda visible desde una zona de paso o
-                desde afuera:
-              </p>
-              <ul class="guia-lista">
-                {riesgos.map((r) => (
-                  <li><strong>{r.titulo}:</strong> {r.texto}</li>
-                ))}
-              </ul>
-            </section>
-
-            <section id="soluciones" class="guia-seccion">
-              <h2>Qué soluciones existen para proteger las pantallas</h2>
-              <p>No todas las soluciones hacen lo mismo. Esta es la comparación honesta:</p>
-
-              <div class="guia-tabla-wrap" role="region" aria-labelledby="tabla-caption" tabindex="0">
-                <table class="guia-tabla">
-                  <caption id="tabla-caption" class="sr-only">
-                    Comparación de soluciones de privacidad para pantallas en oficinas
-                  </caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Solución</th>
-                      <th scope="col">Qué hace</th>
-                      <th scope="col">Limitación</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {comparativa.map((fila) => (
-                      <tr class={fila.destacada ? 'is-destacada' : undefined}>
-                        <th scope="row">{fila.solucion}</th>
-                        <td data-label="Qué hace">{fila.hace}</td>
-                        <td data-label="Limitación">{fila.limitacion}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="guia-destacado">
-                La diferencia clave del film de ocultación: es el único que resuelve el problema
-                puntual —las pantallas— sin sacrificar la apertura y la luz del espacio.
-              </p>
-            </section>
-
-            <section id="film-de-ocultacion" class="guia-seccion">
-              <h2>Qué es el film de ocultación de pantallas y cómo funciona</h2>
-              <p>
-                Es una lámina autoadhesiva que se aplica sobre las paredes y puertas de vidrio.
-                Aprovecha la luz polarizada que emiten los monitores: filtra selectivamente esa
-                luz, de modo que desde afuera del vidrio la pantalla se ve negra, mientras que las
-                personas, los muebles y el ambiente se siguen viendo con normalidad. Dicho simple:
-                es <strong>transparente para el espacio y opaco para las pantallas</strong>, al
-                mismo tiempo.
-              </p>
-              <p>
-                Funciona sobre monitores LCD con retroiluminación LED, que son la enorme mayoría.
-                En pantallas OLED el efecto no está garantizado, porque su tecnología de luz es
-                distinta; por eso conviene verificar el tipo de pantalla antes de instalar.
-              </p>
-            </section>
-
-            <section id="para-quien-es" class="guia-seccion">
-              <h2>Para quién es</h2>
-              <p>
-                Es ideal para espacios donde conviven vidrio y datos confidenciales: bancos y
-                fintech, estudios jurídicos y contables, áreas de seguridad de la información,
-                salas de reunión corporativas, centros de atención y oficinas sobre la calle. En
-                general, cualquier organización que necesite mostrarse abierta y moderna sin
-                exponer lo que hay en sus pantallas.
-              </p>
-            </section>
-
-            <section id="instalacion" class="guia-seccion">
-              <h2>Cómo se instala y qué incluye el servicio</h2>
-              <p>
-                No es un producto que se compra y se pega solo: el valor está en una instalación
-                profesional pareja, sin burbujas ni zonas donde se filtre la imagen. El proceso
-                típico es:
-              </p>
-              <ol class="guia-pasos">
-                <li>Diagnóstico del espacio y las pantallas.</li>
-                <li>Cotización según los metros de vidrio.</li>
-                <li>Instalación por personal capacitado.</li>
-                <li>Verificación del efecto desde los distintos ángulos.</li>
-              </ol>
-              <p>Bien instalado, es una solución discreta y de larga duración.</p>
-            </section>
-
-            <section id="preguntas-frecuentes" class="guia-seccion">
-              <h2>Preguntas frecuentes</h2>
-              <div class="guia-faq">
-                {faqs.map((faq) => (
-                  <div class="guia-faq__item">
-                    <h3>{faq.pregunta}</h3>
-                    <p>{faq.respuesta}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <section class="guia-cta" aria-labelledby="cta-titulo">
-          <div class="container guia-cta__inner">
-            <h2 id="cta-titulo">Protegé la información de tus pantallas</h2>
-            <p>
-              Si tenés una oficina con vidrios y pantallas a la vista, podemos evaluar tu caso y
-              armarte una solución a medida. <a href="/#contacto">Coordiná un diagnóstico</a> sin
-              cargo y definimos alcance, plazos y cotización.
-            </p>
-            <a href="/#contacto" class="btn btn-primary">Coordiná un diagnóstico</a>
-          </div>
-        </section>
-      </article>
-    </main>
-
-    <Footer />
-    <WhatsappFloat />
-  </body>
-</html>
-
-<style>
-  /* Encabezado: mismo fondo oscuro que el hero del home */
-  .guia-hero {
-    background: linear-gradient(180deg, var(--color-primario) 0%, var(--color-primario-800) 100%);
-    color: var(--color-texto-invertido);
-  }
-
-  .guia-hero__inner {
-    padding-block: var(--sp-6) var(--sp-7);
-    max-width: calc(860px + 2 * var(--container-pad));
-  }
-
-  .guia-breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-1);
-    font-size: var(--fs-sm);
-    color: rgba(248, 250, 252, 0.6);
-    margin-bottom: var(--sp-4);
-  }
-
-  .guia-breadcrumb a {
-    color: rgba(248, 250, 252, 0.85);
-    text-decoration: none;
-  }
-
-  .guia-breadcrumb a:hover {
-    color: var(--color-acento);
-  }
-
-  .guia-hero__title {
-    font-size: var(--fs-2xl);
-    margin-bottom: var(--sp-3);
-  }
-
-  .guia-hero__resumen {
-    font-size: var(--fs-md);
-    color: rgba(248, 250, 252, 0.8);
-    line-height: var(--lh-normal);
-    margin-bottom: var(--sp-3);
-  }
-
-  .guia-hero__resumen strong {
-    color: var(--color-texto-invertido);
-  }
-
-  .guia-hero__meta {
-    font-size: var(--fs-sm);
-    color: rgba(248, 250, 252, 0.6);
-  }
-
-  @media (min-width: 768px) {
-    .guia-hero__title {
-      font-size: var(--fs-3xl);
-    }
-  }
-
-  /* Layout: índice lateral + cuerpo */
-  .guia-layout {
-    display: grid;
-    gap: var(--sp-5);
-    padding-block: var(--sp-6);
-  }
-
-  .guia-indice {
-    background: var(--color-secundario-100);
-    border-radius: var(--radius-md);
-    padding: var(--sp-3);
-    font-size: var(--fs-sm);
-  }
-
-  .guia-indice__titulo {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-acento-600);
-    margin-bottom: var(--sp-2);
-  }
-
-  .guia-indice ol {
-    margin: 0;
-    padding-left: 1.2em;
-    display: grid;
-    gap: var(--sp-1);
-  }
-
-  .guia-indice a {
-    color: var(--color-texto);
-    text-decoration: none;
-  }
-
-  .guia-indice a:hover {
-    color: var(--color-acento-600);
-    text-decoration: underline;
-  }
-
-  @media (min-width: 1000px) {
-    .guia-layout {
-      grid-template-columns: 240px minmax(0, 1fr);
-      gap: var(--sp-6);
-      align-items: start;
-    }
-
-    .guia-indice {
-      position: sticky;
-      top: calc(72px + var(--sp-3));
-    }
-  }
-
-  /* Cuerpo del artículo */
-  .guia-cuerpo {
-    max-width: 760px;
-    min-width: 0;
-  }
-
-  .guia-figura {
-    margin: 0 0 var(--sp-5);
-  }
-
-  .guia-figura img {
-    width: 100%;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-  }
-
-  .guia-figura figcaption {
-    font-size: var(--fs-sm);
-    color: var(--color-secundario);
-    margin-top: var(--sp-1);
-  }
-
-  .guia-seccion {
-    scroll-margin-top: calc(72px + var(--sp-3));
-    padding-block: var(--sp-4);
-    border-top: 1px solid var(--color-borde);
-  }
-
-  .guia-seccion:first-of-type {
-    border-top: 0;
-    padding-top: 0;
-  }
-
-  .guia-seccion h2 {
-    font-size: var(--fs-xl);
-    margin-bottom: var(--sp-3);
-  }
-
-  .guia-seccion p,
-  .guia-lista,
-  .guia-pasos {
-    font-size: var(--fs-md);
-    line-height: var(--lh-normal);
-    color: #334155;
-  }
-
-  .guia-seccion p + p,
-  .guia-seccion p + ul,
-  .guia-seccion p + ol,
-  .guia-seccion ol + p,
-  .guia-seccion div + p {
-    margin-top: var(--sp-2);
-  }
-
-  .guia-seccion strong {
-    color: var(--color-texto);
-  }
-
-  @media (min-width: 768px) {
-    .guia-seccion h2 {
-      font-size: var(--fs-2xl);
-    }
-  }
-
-  .guia-lista {
-    display: grid;
-    gap: var(--sp-1);
-  }
-
-  .guia-lista li {
-    position: relative;
-    padding-left: var(--sp-3);
-  }
-
-  .guia-lista li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.65em;
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    background: var(--color-acento);
-  }
-
-  .guia-pasos {
-    margin: 0;
-    padding-left: 1.4em;
-    display: grid;
-    gap: var(--sp-1);
-  }
-
-  .guia-pasos li::marker {
-    color: var(--color-acento-600);
-    font-weight: 600;
-  }
-
-  /* Tabla comparativa */
-  .guia-tabla-wrap {
-    margin-top: var(--sp-3);
-    overflow-x: auto;
-    border: 1px solid var(--color-borde);
-    border-radius: var(--radius-md);
-  }
-
-  .guia-tabla {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: var(--fs-base);
-    line-height: var(--lh-snug);
-  }
-
-  .guia-tabla th,
-  .guia-tabla td {
-    text-align: left;
-    vertical-align: top;
-    padding: var(--sp-2);
-    border-bottom: 1px solid var(--color-borde);
-  }
-
-  .guia-tabla thead th {
-    background: var(--color-primario);
-    color: var(--color-texto-invertido);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .guia-tabla tbody th {
-    font-weight: 600;
-    color: var(--color-texto);
-  }
-
-  .guia-tabla td {
-    color: #334155;
-  }
-
-  .guia-tabla tbody tr:last-child th,
-  .guia-tabla tbody tr:last-child td {
-    border-bottom: 0;
-  }
-
-  .guia-tabla tr.is-destacada th,
-  .guia-tabla tr.is-destacada td {
-    background: rgba(34, 211, 238, 0.1);
-  }
-
-  .guia-tabla tr.is-destacada th {
-    box-shadow: inset 4px 0 0 var(--color-acento);
-  }
-
-  /* Mobile: cada fila de la tabla se apila como tarjeta */
-  @media (max-width: 640px) {
-    .guia-tabla thead {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-    }
-
-    .guia-tabla tr,
-    .guia-tabla th,
-    .guia-tabla td {
-      display: block;
-    }
-
-    .guia-tabla tbody tr {
-      border-bottom: 1px solid var(--color-borde);
-    }
-
-    .guia-tabla tbody tr:last-child {
-      border-bottom: 0;
-    }
-
-    .guia-tabla th,
-    .guia-tabla td {
-      border-bottom: 0;
-      padding-block: var(--sp-1);
-    }
-
-    .guia-tabla tbody th {
-      padding-top: var(--sp-2);
-    }
-
-    .guia-tabla td:last-child {
-      padding-bottom: var(--sp-2);
-    }
-
-    .guia-tabla td::before {
-      content: attr(data-label);
-      display: block;
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      color: var(--color-secundario);
-    }
-  }
-
-  .guia-destacado {
-    margin-top: var(--sp-3) !important;
-    background: #0f2a4a;
-    color: rgba(248, 250, 252, 0.9) !important;
-    border-radius: var(--radius-md);
-    padding: var(--sp-3);
-  }
-
-  /* FAQ: respuestas siempre visibles (texto autocontenido para buscadores e IA) */
-  .guia-faq {
-    display: grid;
-    gap: var(--sp-2);
-  }
-
-  .guia-faq__item {
-    border: 1px solid var(--color-borde);
-    border-radius: var(--radius-md);
-    padding: var(--sp-3);
-  }
-
-  .guia-faq__item h3 {
-    font-size: var(--fs-md);
-    margin-bottom: var(--sp-1);
-  }
-
-  .guia-faq__item p {
-    font-size: var(--fs-base);
-  }
-
-  /* CTA final */
-  .guia-cta {
-    background: linear-gradient(180deg, var(--color-primario-800) 0%, var(--color-primario) 100%);
-    color: var(--color-texto-invertido);
-  }
-
-  .guia-cta__inner {
-    padding-block: var(--sp-7);
-    max-width: calc(760px + 2 * var(--container-pad));
-    text-align: center;
-  }
-
-  .guia-cta h2 {
-    font-size: var(--fs-2xl);
-    margin-bottom: var(--sp-2);
-  }
-
-  .guia-cta p {
-    font-size: var(--fs-md);
-    color: rgba(248, 250, 252, 0.8);
-    margin-bottom: var(--sp-4);
-  }
-
-  .guia-cta p a {
-    color: var(--color-acento);
-  }
-
-  @media (max-width: 599px) {
-    .guia-cta .btn {
-      width: 100%;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .guia-cta h2 {
-      font-size: var(--fs-3xl);
-    }
-  }
-</style>
+<GuiaLayout
+  title="Privacidad de pantallas en oficinas | Guía anti visual hacking"
+  description="Cómo evitar que vean las pantallas de tu oficina desde afuera. Qué es el visual hacking y cómo funciona el film de ocultación para vidrios. Guía completa."
+  h1="Privacidad de pantallas en la oficina: cómo proteger tu información del visual hacking"
+  breadcrumb="Guía de privacidad de pantallas"
+  fechaPublicacion="2026-10-03"
+  fechaActualizacion="2026-10-03"
+  imagen="/img/pantalla-oculta-vidrio.svg"
+  imagenAlt="Monitor que se ve negro desde afuera de una sala de vidrio con film de ocultación"
+  imagenCaption="Con el film de ocultación, desde afuera del vidrio se ven las personas y el ambiente, pero las pantallas aparecen en negro."
+  indice={indice}
+  faqs={faqs}
+>
+  <Fragment slot="resumen">
+    En una oficina moderna, gran parte de la información confidencial no se filtra por un
+    hackeo informático: se filtra por la vista. Alcanza con que alguien lea un monitor desde el
+    pasillo, desde una sala de reunión con paredes de vidrio o desde la vereda. A eso se lo llama
+    <strong>visual hacking</strong>, y la forma más efectiva de evitarlo sin cerrar el espacio es
+    aplicar un <strong>film de ocultación de pantallas</strong> sobre los vidrios: desde afuera
+    los monitores se ven en negro, mientras adentro todo sigue normal. En esta guía te
+    explicamos qué es el riesgo, qué soluciones existen y cómo funciona esta tecnología.
+  </Fragment>
+
+  <section id="que-es-visual-hacking" class="guia-seccion">
+    <h2>Qué es el visual hacking (y por qué es un riesgo real)</h2>
+    <p>
+      El <strong>visual hacking</strong> es la obtención de información sensible simplemente
+      mirando una pantalla, un escritorio o un documento ajeno. No requiere conocimientos técnicos
+      ni dejar rastro: una persona ve datos de un cliente, una contraseña, un número de cuenta o
+      una pantalla de sistema, y los memoriza o fotografía.
+    </p>
+    <p>
+      Es un riesgo subestimado porque las empresas invierten en firewalls y antivirus, pero dejan
+      las pantallas a la vista de cualquiera que pase. En oficinas con mucho vidrio —cada vez más
+      comunes— el problema se multiplica: la transparencia que suma estética y sensación de
+      apertura también expone lo que hay en los monitores.
+    </p>
+    <p>
+      Lo desarrollamos en detalle en <a href="/que-es-el-visual-hacking/">qué es el visual
+      hacking y cómo evitarlo</a>.
+    </p>
+  </section>
+
+  <section id="donde-esta-el-peligro" class="guia-seccion">
+    <h2>Dónde está el peligro en una oficina moderna</h2>
+    <p>
+      El riesgo se concentra donde una pantalla queda visible desde una zona de paso o desde
+      afuera:
+    </p>
+    <ul class="guia-lista">
+      <li>
+        <strong>Salas de reunión con paredes de vidrio:</strong> el monitor de la videollamada o
+        la presentación se ve desde el pasillo (ver
+        <a href="/privacidad-salas-de-reunion-vidrio/">privacidad en salas de reunión de vidrio</a>).
+      </li>
+      <li>
+        <strong>Oficinas sobre la calle o con ventanales:</strong> las pantallas quedan expuestas
+        hacia afuera.
+      </li>
+      <li>
+        <strong>Espacios de atención al cliente:</strong> el público ve la pantalla del operador.
+      </li>
+      <li>
+        <strong>Áreas sensibles:</strong> (finanzas, legales, RR.HH., seguridad de la
+        información) con tabiques vidriados.
+      </li>
+    </ul>
+  </section>
+
+  <section id="soluciones" class="guia-seccion">
+    <h2>Qué soluciones existen para proteger las pantallas</h2>
+    <p>No todas las soluciones hacen lo mismo. Esta es la comparación honesta:</p>
+
+    <div class="guia-tabla-wrap" role="region" aria-labelledby="tabla-caption" tabindex="0">
+      <table class="guia-tabla">
+        <caption id="tabla-caption" class="sr-only">
+          Comparación de soluciones de privacidad para pantallas en oficinas
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Solución</th>
+            <th scope="col">Qué hace</th>
+            <th scope="col">Limitación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparativa.map((fila) => (
+            <tr class={fila.destacada ? 'is-destacada' : undefined}>
+              <th scope="row">{fila.solucion}</th>
+              <td data-label="Qué hace">{fila.hace}</td>
+              <td data-label="Limitación">{fila.limitacion}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="guia-destacado">
+      La diferencia clave del film de ocultación: es el único que resuelve el problema puntual
+      —las pantallas— sin sacrificar la apertura y la luz del espacio.
+    </p>
+    <p>
+      Si estás entre un vidrio que se opaca y un film que oculta solo los monitores, mirá la
+      comparación <a href="/smart-film-vs-film-de-ocultacion/">smart film vs film de
+      ocultación</a>.
+    </p>
+  </section>
+
+  <section id="film-de-ocultacion" class="guia-seccion">
+    <h2>Qué es el film de ocultación de pantallas y cómo funciona</h2>
+    <p>
+      Es una lámina autoadhesiva que se aplica sobre las paredes y puertas de vidrio. Aprovecha la
+      luz polarizada que emiten los monitores: filtra selectivamente esa luz, de modo que desde
+      afuera del vidrio la pantalla se ve negra, mientras que las personas, los muebles y el
+      ambiente se siguen viendo con normalidad. Dicho simple: es <strong>transparente para el
+      espacio y opaco para las pantallas</strong>, al mismo tiempo.
+    </p>
+    <p>
+      Funciona sobre monitores LCD con retroiluminación LED, que son la enorme mayoría. En
+      pantallas OLED el efecto no está garantizado, porque su tecnología de luz es distinta; por
+      eso conviene verificar el tipo de pantalla antes de instalar.
+    </p>
+  </section>
+
+  <section id="para-quien-es" class="guia-seccion">
+    <h2>Para quién es</h2>
+    <p>
+      Es ideal para espacios donde conviven vidrio y datos confidenciales: bancos y fintech,
+      estudios jurídicos y contables, áreas de seguridad de la información, salas de reunión
+      corporativas, centros de atención y oficinas sobre la calle. En general, cualquier
+      organización que necesite mostrarse abierta y moderna sin exponer lo que hay en sus
+      pantallas.
+    </p>
+    <p>
+      Para muchas de estas organizaciones, además, cuidar la confidencialidad de los datos es una
+      obligación: lo explicamos en <a href="/ley-25326-proteccion-datos-seguridad-visual/">Ley
+      25.326 y seguridad visual</a>.
+    </p>
+  </section>
+
+  <section id="instalacion" class="guia-seccion">
+    <h2>Cómo se instala y qué incluye el servicio</h2>
+    <p>
+      No es un producto que se compra y se pega solo: el valor está en una instalación
+      profesional pareja, sin burbujas ni zonas donde se filtre la imagen. El proceso típico es:
+    </p>
+    <ol class="guia-pasos">
+      <li>Diagnóstico del espacio y las pantallas.</li>
+      <li>Cotización según los metros de vidrio.</li>
+      <li>Instalación por personal capacitado.</li>
+      <li>Verificación del efecto desde los distintos ángulos.</li>
+    </ol>
+    <p>Bien instalado, es una solución discreta y de larga duración.</p>
+  </section>
+</GuiaLayout>

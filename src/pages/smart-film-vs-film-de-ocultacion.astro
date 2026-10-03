@@ -1,0 +1,111 @@
+---
+// Artículo satélite: comparación smart film (PDLC) vs film de ocultación.
+// Enlaza a la guía pillar.
+import GuiaLayout from '../layouts/GuiaLayout.astro';
+
+const indice = [
+  { id: 'que-es-smart-film', label: 'Qué es el smart film' },
+  { id: 'que-es-film-de-ocultacion', label: 'Qué es el film de ocultación' },
+  { id: 'comparacion', label: 'Comparación directa' },
+  { id: 'cual-conviene', label: '¿Cuál conviene?' },
+];
+
+const comparativa = [
+  { criterio: 'Qué oculta', smart: 'Todo el ambiente', ocultacion: 'Solo las pantallas' },
+  { criterio: 'Transparencia', smart: 'Se pierde al activarlo', ocultacion: 'Se mantiene siempre' },
+  { criterio: 'Control', smart: 'Manual (on/off)', ocultacion: 'Permanente' },
+  { criterio: 'Instalación', smart: 'Requiere conexión eléctrica', ocultacion: 'Solo adhesivo' },
+  { criterio: 'Costo', smart: 'Más alto', ocultacion: 'Más accesible' },
+  {
+    criterio: 'Ideal para',
+    smart: 'Privacidad total puntual',
+    ocultacion: 'Proteger datos sin cerrar el espacio',
+  },
+];
+---
+
+<GuiaLayout
+  title="Smart film vs film de ocultación de pantallas: cuál conviene"
+  description="¿Vidrio que se opaca o film que oculta solo las pantallas? Comparamos smart film (PDLC) y film de ocultación para que elijas la solución correcta."
+  h1="Smart film vs film de ocultación: ¿cuál es la solución correcta?"
+  breadcrumb="Smart film vs film de ocultación"
+  eyebrow="Comparativa"
+  fechaPublicacion="2026-10-03"
+  fechaActualizacion="2026-10-03"
+  imagen="/img/smart-film-vs-film-de-ocultacion.svg"
+  imagenAlt="Comparación: a la izquierda un vidrio con smart film totalmente opaco, a la derecha un vidrio transparente con film de ocultación donde solo el monitor se ve negro"
+  imagenCaption="Smart film: el vidrio entero se vuelve opaco. Film de ocultación: el vidrio sigue transparente y solo la pantalla se ve negra."
+  indice={indice}
+>
+  <Fragment slot="resumen">
+    Son dos productos que suelen confundirse porque ambos se aplican sobre vidrio y hablan de
+    "privacidad", pero resuelven problemas distintos. Elegir mal significa gastar en algo que no
+    hace lo que necesitás.
+  </Fragment>
+
+  <section id="que-es-smart-film" class="guia-seccion">
+    <h2>Qué es el smart film (PDLC)</h2>
+    <p>
+      El <strong>smart film</strong> o vidrio inteligente (tecnología PDLC) es una lámina que,
+      con un interruptor, pasa el vidrio de transparente a opaco por completo. Cuando lo activás,
+      nadie ve nada del otro lado: ni las pantallas, ni las personas, ni el ambiente. Es ideal
+      cuando querés privacidad total y a demanda de una sala.
+    </p>
+  </section>
+
+  <section id="que-es-film-de-ocultacion" class="guia-seccion">
+    <h2>Qué es el film de ocultación de pantallas</h2>
+    <p>
+      El <strong>film de ocultación</strong> (tipo Casper) hace algo más quirúrgico: deja el
+      vidrio transparente, pero hace que solo las pantallas se vean negras desde afuera. El
+      ambiente y las personas se siguen viendo con normalidad. Está siempre activo, sin
+      interruptor.
+    </p>
+  </section>
+
+  <section id="comparacion" class="guia-seccion">
+    <h2>Comparación directa</h2>
+
+    <div class="guia-tabla-wrap" role="region" aria-labelledby="tabla-caption" tabindex="0">
+      <table class="guia-tabla">
+        <caption id="tabla-caption" class="sr-only">
+          Comparación entre smart film (PDLC) y film de ocultación de pantallas
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only">Criterio</span></th>
+            <th scope="col">Smart film (PDLC)</th>
+            <th scope="col">Film de ocultación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparativa.map((fila) => (
+            <tr>
+              <th scope="row">{fila.criterio}</th>
+              <td data-label="Smart film (PDLC)">{fila.smart}</td>
+              <td data-label="Film de ocultación">{fila.ocultacion}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="cual-conviene" class="guia-seccion">
+    <h2>Entonces, ¿cuál conviene?</h2>
+    <p>
+      Si necesitás <strong>cerrar visualmente una sala entera</strong> en ciertos momentos (ej:
+      un directorio), el smart film es tu opción.
+    </p>
+    <p>
+      Si lo que te preocupa es <strong>que no se lean las pantallas</strong> pero querés mantener
+      la oficina abierta, luminosa y transparente, el film de ocultación es la respuesta —y suele
+      ser más económico, porque no lleva instalación eléctrica.
+    </p>
+    <p>
+      Profundizamos en cómo funciona esta tecnología en la
+      <a href="/privacidad-de-pantallas-en-oficinas/">guía de privacidad de pantallas en
+      oficinas</a>.
+    </p>
+  </section>
+</GuiaLayout>

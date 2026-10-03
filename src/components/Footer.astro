@@ -1,6 +1,7 @@
 ---
 // Footer discreto. Reemplazar datos de contacto placeholder.
 import Logo from './Logo.astro';
+import { GUIAS } from '../data/guias';
 
 const NOMBRE_MARCA = 'Invision';
 const anioActual = new Date().getFullYear();
@@ -24,9 +25,17 @@ const anioActual = new Date().getFullYear();
       <li><a href="/#que-es">Qué es</a></li>
       <li><a href="/#beneficios">Beneficios</a></li>
       <li><a href="/#casos">Casos</a></li>
-      <li><a href="/privacidad-de-pantallas-en-oficinas/">Guía de privacidad de pantallas</a></li>
       <li><a href="/#contacto">Contacto</a></li>
     </ul>
+
+    <div>
+      <p class="footer__titulo">Recursos</p>
+      <ul class="footer__links">
+        {GUIAS.map((g) => (
+          <li><a href={g.path}>{g.titulo}</a></li>
+        ))}
+      </ul>
+    </div>
   </div>
 
   <div class="container footer__bottom">
@@ -86,9 +95,22 @@ const anioActual = new Date().getFullYear();
     color: rgba(248, 250, 252, 0.45);
   }
 
+  .footer__titulo {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--color-texto-invertido);
+    margin-bottom: var(--sp-1);
+  }
+
   @media (min-width: 720px) {
     .footer__inner {
-      grid-template-columns: 1.2fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .footer__inner {
+      grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
     }
   }
 </style>

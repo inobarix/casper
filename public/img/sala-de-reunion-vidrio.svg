@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111a2e"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#fondo)"/>
+  <rect y="500" width="1200" height="175" fill="#172236"/>
+
+  <!-- Sala 1: sin protección, presentación legible -->
+  <rect x="130" y="180" width="300" height="170" rx="6" fill="#0f2a4a" stroke="#475569" stroke-width="5"/>
+  <rect x="150" y="200" width="150" height="14" rx="3" fill="#f8fafc" fill-opacity="0.85"/>
+  <g fill="#22d3ee">
+    <rect x="160" y="270" width="40" height="60" rx="3"/>
+    <rect x="215" y="245" width="40" height="85" rx="3"/>
+    <rect x="270" y="290" width="40" height="40" rx="3"/>
+    <rect x="325" y="230" width="40" height="100" rx="3"/>
+  </g>
+  <rect x="110" y="420" width="340" height="16" rx="5" fill="#64748b"/>
+  <rect x="80" y="90" width="400" height="410" fill="#f8fafc" fill-opacity="0.04" stroke="#f8fafc" stroke-opacity="0.35" stroke-width="3"/>
+
+  <!-- Sala 2: con film de ocultación, monitor negro -->
+  <rect x="770" y="180" width="300" height="170" rx="6" fill="#000" stroke="#475569" stroke-width="5"/>
+  <rect x="750" y="420" width="340" height="16" rx="5" fill="#64748b"/>
+  <g fill="#475569">
+    <circle cx="830" cy="360" r="22"/>
+    <path d="M792 420c0-40 16-56 38-56s38 16 38 56z"/>
+    <circle cx="1010" cy="360" r="22"/>
+    <path d="M972 420c0-40 16-56 38-56s38 16 38 56z"/>
+  </g>
+  <rect x="720" y="90" width="400" height="410" fill="#22d3ee" fill-opacity="0.06" stroke="#22d3ee" stroke-opacity="0.5" stroke-width="3"/>
+
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <text x="280" y="70" font-size="16" font-weight="600" letter-spacing="1.5" fill="#94a3b8">SIN PROTECCIÓN</text>
+    <text x="920" y="70" font-size="16" font-weight="600" letter-spacing="1.5" fill="#22d3ee">CON FILM DE OCULTACIÓN</text>
+    <text x="600" y="600" font-size="22" fill="#f8fafc" fill-opacity="0.85">Vista desde el pasillo</text>
+  </g>
+</svg>

@@ -1,0 +1,102 @@
+---
+// Artículo satélite: definición de visual hacking. Enlaza a la guía pillar
+// y al artículo de la Ley 25.326.
+import GuiaLayout from '../layouts/GuiaLayout.astro';
+
+const indice = [
+  { id: 'por-que-es-efectivo', label: 'Por qué es tan efectivo' },
+  { id: 'donde-ocurre', label: 'Dónde ocurre' },
+  { id: 'como-prevenirlo', label: 'Cómo prevenirlo' },
+];
+
+const faqs = [
+  {
+    pregunta: '¿El visual hacking es ilegal?',
+    respuesta:
+      'Acceder a información confidencial ajena sin autorización puede constituir una infracción, pero el problema real es que es muy difícil de detectar y probar. Por eso conviene prevenirlo, no perseguirlo.',
+  },
+  {
+    pregunta: '¿Un filtro de pantalla alcanza para evitar el visual hacking?',
+    respuesta:
+      'Ayuda en cada monitor individual, pero no cubre el caso de oficinas con vidrios donde se ven varias pantallas a la vez. Ahí es más eficiente actuar sobre el vidrio.',
+  },
+];
+---
+
+<GuiaLayout
+  title="¿Qué es el visual hacking? Definición, riesgos y cómo evitarlo"
+  description="El visual hacking es robar información mirando una pantalla ajena. Qué es, por qué es tan efectivo y cómo proteger tus datos en la oficina. Guía clara."
+  h1="¿Qué es el visual hacking y por qué deberías preocuparte?"
+  breadcrumb="Qué es el visual hacking"
+  eyebrow="Seguridad visual"
+  fechaPublicacion="2026-10-03"
+  fechaActualizacion="2026-10-03"
+  imagen="/img/visual-hacking.svg"
+  imagenAlt="Persona en un pasillo leyendo los datos de un monitor a través de una pared de vidrio"
+  imagenCaption="El visual hacking no necesita software: alcanza con mirar una pantalla expuesta."
+  indice={indice}
+  faqs={faqs}
+>
+  <Fragment slot="resumen">
+    El <strong>visual hacking</strong> es la obtención de información confidencial simplemente
+    mirando: una pantalla, un escritorio o un documento ajeno. No usa software ni deja rastro.
+    Alcanza con que alguien lea un monitor desde un pasillo, una sala de reunión de vidrio o la
+    vereda, y memorice o fotografíe lo que ve.
+  </Fragment>
+
+  <section id="por-que-es-efectivo" class="guia-seccion">
+    <h2>Por qué es tan efectivo</h2>
+    <p>
+      Es el eslabón que casi nadie protege. Las empresas invierten en antivirus, firewalls y
+      contraseñas, pero dejan las pantallas a la vista de cualquiera.
+    </p>
+    <p>
+      Un experimento global de seguridad visual realizado por el Ponemon Institute (patrocinado
+      por 3M) encontró que, en la gran mayoría de los intentos, un "espía" sentado en una oficina
+      lograba captar información sensible a simple vista, y que muchas veces nadie lo frenaba.
+    </p>
+    <p class="guia-destacado">
+      El dato de fondo: la información más valiosa suele estar, literalmente, a la vista.
+    </p>
+  </section>
+
+  <section id="donde-ocurre" class="guia-seccion">
+    <h2>Dónde ocurre</h2>
+    <ul class="guia-lista">
+      <li>
+        <strong>En oficinas abiertas,</strong> donde las pantallas se ven desde zonas de paso.
+      </li>
+      <li>
+        <strong>En salas de reunión con paredes de vidrio,</strong> donde la presentación o la
+        videollamada queda expuesta al pasillo (ver
+        <a href="/privacidad-salas-de-reunion-vidrio/">privacidad en salas de reunión de vidrio</a>).
+      </li>
+      <li>
+        <strong>En espacios de atención al público,</strong> donde el cliente ve la pantalla del
+        operador.
+      </li>
+      <li>
+        <strong>En lugares públicos</strong> (cafés, aeropuertos, transporte), al trabajar con el
+        notebook.
+      </li>
+    </ul>
+  </section>
+
+  <section id="como-prevenirlo" class="guia-seccion">
+    <h2>Cómo prevenir el visual hacking</h2>
+    <p>
+      Las medidas van desde lo organizativo (políticas de escritorio limpio, ubicar los monitores
+      lejos de zonas de paso) hasta lo técnico: filtros de privacidad en cada pantalla, o —cuando
+      el problema son los vidrios de la oficina— un <strong>film de ocultación de
+      pantallas</strong>, que hace que los monitores se vean negros desde afuera sin opacar el
+      ambiente.
+    </p>
+    <p>
+      Si tu oficina tiene paredes de vidrio, lo más efectivo es el film de ocultación. Te lo
+      explicamos en profundidad en nuestra
+      <a href="/privacidad-de-pantallas-en-oficinas/">guía de privacidad de pantallas en
+      oficinas</a>. Y en muchos casos proteger esos datos es, además,
+      <a href="/ley-25326-proteccion-datos-seguridad-visual/">una obligación legal</a>.
+    </p>
+  </section>
+</GuiaLayout>

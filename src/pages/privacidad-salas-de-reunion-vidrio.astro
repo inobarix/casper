@@ -1,0 +1,80 @@
+---
+// Artículo satélite: privacidad en salas de reunión de vidrio. Enlaza a la
+// guía pillar y al formulario de contacto.
+import GuiaLayout from '../layouts/GuiaLayout.astro';
+
+const indice = [
+  { id: 'que-se-expone', label: 'Qué se expone' },
+  { id: 'soluciones-habituales', label: 'Soluciones habituales y sus límites' },
+  { id: 'por-que-film-de-ocultacion', label: 'Por qué el film de ocultación' },
+];
+---
+
+<GuiaLayout
+  title="Privacidad en salas de reunión de vidrio: cómo proteger las pantallas"
+  description="Las salas de reunión de vidrio exponen tus presentaciones y videollamadas. Cómo mantener la transparencia del espacio sin que se lean las pantallas."
+  h1="Cómo tener privacidad en salas de reunión con paredes de vidrio"
+  breadcrumb="Privacidad en salas de reunión de vidrio"
+  eyebrow="Salas de reunión"
+  fechaPublicacion="2026-10-03"
+  fechaActualizacion="2026-10-03"
+  imagen="/img/sala-de-reunion-vidrio.svg"
+  imagenAlt="Pasillo de oficina frente a salas de reunión de vidrio: una pantalla expuesta con datos y otra que se ve negra con film de ocultación"
+  imagenCaption="Sin film, la presentación se lee desde el pasillo. Con film de ocultación, la sala sigue transparente y el monitor se ve apagado."
+  indice={indice}
+  ctaTitulo="Protegé las pantallas de tus salas de reunión"
+>
+  <Fragment slot="resumen">
+    Las salas de reunión vidriadas se volvieron el estándar de la oficina moderna: aportan luz,
+    sensación de amplitud y una estética abierta. Pero tienen un costo silencioso: todo lo que se
+    proyecta en la pantalla queda a la vista de quien pase por el pasillo.
+  </Fragment>
+
+  <section id="que-se-expone" class="guia-seccion">
+    <h2>Qué se expone en una sala de vidrio</h2>
+    <p>
+      En una reunión típica puede verse desde afuera: la pantalla de una videollamada, cifras
+      financieras de una presentación, datos de clientes, estrategias comerciales o pantallas de
+      sistemas internos. Información que no debería salir de esa sala, saliendo por el vidrio.
+    </p>
+  </section>
+
+  <section id="soluciones-habituales" class="guia-seccion">
+    <h2>Las soluciones habituales y sus límites</h2>
+    <ul class="guia-lista">
+      <li>
+        <strong>Cerrar con cortinas o persianas:</strong> funciona, pero mata la luz y la estética
+        abierta que justamente buscabas.
+      </li>
+      <li>
+        <strong>Vinilos esmerilados:</strong> tapan la visión, pero cierran el espacio de forma
+        permanente.
+      </li>
+      <li>
+        <strong>Smart film:</strong> opaca toda la sala a demanda; excelente para privacidad
+        total, excesivo si solo te preocupa la pantalla (ver
+        <a href="/smart-film-vs-film-de-ocultacion/">smart film vs film de ocultación</a>).
+      </li>
+      <li>
+        <strong>Film de ocultación de pantallas:</strong> mantiene el vidrio transparente y hace
+        que solo los monitores se vean negros desde afuera. Resuelve el problema sin cerrar la
+        sala.
+      </li>
+    </ul>
+  </section>
+
+  <section id="por-que-film-de-ocultacion" class="guia-seccion">
+    <h2>Por qué el film de ocultación encaja tan bien en salas de reunión</h2>
+    <p>
+      Porque conserva lo que hace valiosa a una sala de vidrio —la apertura y la luz— y elimina el
+      único punto débil: la pantalla expuesta. Quien pase por afuera ve una sala normal con un
+      monitor apagado; adentro, la reunión transcurre con total visibilidad.
+    </p>
+    <p>
+      Mirá cómo funciona en detalle en nuestra
+      <a href="/privacidad-de-pantallas-en-oficinas/">guía de privacidad de pantallas en
+      oficinas</a>, o <a href="/#contacto">escribinos para coordinar un diagnóstico de tus
+      salas</a>.
+    </p>
+  </section>
+</GuiaLayout>

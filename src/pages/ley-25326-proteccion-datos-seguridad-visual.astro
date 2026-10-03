@@ -1,0 +1,118 @@
+---
+// Artículo satélite: Ley 25.326 y seguridad visual. Contenido informativo,
+// no asesoramiento legal. Enlaza a la guía pillar y cita sus fuentes.
+import GuiaLayout from '../layouts/GuiaLayout.astro';
+
+const indice = [
+  { id: 'que-obliga', label: 'Qué obliga concretamente' },
+  { id: 'seguridad-visual', label: 'Dónde entra la seguridad visual' },
+  { id: 'bancos-fintech-estudios', label: 'Bancos, fintech y estudios jurídicos' },
+  { id: 'como-ayuda', label: 'Cómo ayuda el film de ocultación' },
+  { id: 'fuentes', label: 'Fuentes' },
+];
+
+const fuentes = [
+  {
+    titulo: 'Protección de datos personales: ¿sigue siendo suficiente la Ley 25.326 en 2026?',
+    medio: 'Diario Judicial',
+    url: 'https://www.diariojudicial.com/news-103126-proteccion-de-datos-personales-sigue-siendo-suficiente-la-ley-25326-en-2026',
+  },
+  {
+    titulo: 'Se impulsa un nuevo proyecto de reforma del régimen de protección de datos en Argentina',
+    medio: 'IAPP',
+    url: 'https://iapp.org/news/a/se-impulsa-un-nuevo-proyecto-de-reforma-del-r-gimen-de-protecci-n-de-datos-en-argentina',
+  },
+  {
+    titulo: 'Ley 25.326 de Protección de Datos Personales: qué exige a las empresas en Argentina',
+    medio: 'XMS Latam',
+    url: 'https://xmslatam.com/ar/ley-25326-proteccion-datos-personales/',
+  },
+];
+---
+
+<GuiaLayout
+  title="Ley 25.326 y seguridad visual: qué exige a las empresas en Argentina"
+  description="La Ley 25.326 obliga a proteger la confidencialidad de los datos personales. Qué implica la seguridad visual de las pantallas y cómo cumplir. Informativo."
+  h1="Ley 25.326: qué exige en materia de seguridad de datos (y por qué la seguridad visual cuenta)"
+  breadcrumb="Ley 25.326 y seguridad visual"
+  eyebrow="Protección de datos"
+  fechaPublicacion="2026-10-03"
+  fechaActualizacion="2026-10-03"
+  imagen="/img/ley-25326-seguridad-visual.svg"
+  imagenAlt="Monitor con datos personales protegido por un escudo, junto a un documento legal, representando la seguridad visual de los datos"
+  imagenCaption="La confidencialidad de los datos personales también incluye que no se puedan leer desde afuera de la oficina."
+  indice={indice}
+>
+  <Fragment slot="resumen">
+    En Argentina, el tratamiento de datos personales está regulado por la <strong>Ley 25.326 de
+    Protección de Datos Personales</strong>, cuya autoridad de aplicación es la Agencia de Acceso
+    a la Información Pública (AAIP). La ley sigue vigente en 2026, y existe un proyecto de reforma
+    en debate en el Congreso que apunta a modernizarla y endurecer su régimen de responsabilidad.
+  </Fragment>
+
+  <section id="que-obliga" class="guia-seccion">
+    <h2>Qué obliga concretamente</h2>
+    <p>
+      La ley exige que quien trata datos personales adopte las <strong>medidas técnicas y
+      organizativas</strong> necesarias para garantizar la seguridad y confidencialidad de esos
+      datos, de modo de evitar su adulteración, pérdida, consulta o tratamiento no autorizado.
+    </p>
+    <p>
+      En criollo: no alcanza con tener los datos "guardados", hay que impedir que personas no
+      autorizadas accedan a ellos.
+    </p>
+  </section>
+
+  <section id="seguridad-visual" class="guia-seccion">
+    <h2>Dónde entra la seguridad visual</h2>
+    <p>
+      Cuando se piensa en seguridad de datos, casi siempre se piensa en lo digital: contraseñas,
+      cifrado, backups. Pero una pantalla con datos de clientes visible desde un pasillo o desde
+      la calle es, también, un acceso no autorizado a información confidencial (lo que se conoce
+      como <a href="/que-es-el-visual-hacking/">visual hacking</a>).
+    </p>
+    <p class="guia-destacado">
+      La exposición visual de las pantallas es un punto ciego del cumplimiento: una fuga que no
+      pasa por la red, sino por el vidrio.
+    </p>
+  </section>
+
+  <section id="bancos-fintech-estudios" class="guia-seccion">
+    <h2>Por qué le importa especialmente a bancos, fintech y estudios jurídicos</h2>
+    <p>
+      Son sectores que manejan datos sensibles y que están bajo mayor escrutinio regulatorio.
+      Para ellos, demostrar que tomaron medidas razonables para proteger la confidencialidad
+      —incluida la dimensión visual— no es solo buena práctica: es parte de su deber de
+      diligencia frente a la AAIP y frente a sus propios clientes.
+    </p>
+  </section>
+
+  <section id="como-ayuda" class="guia-seccion">
+    <h2>Cómo ayuda el film de ocultación de pantallas</h2>
+    <p>
+      Aplicar un film que impide leer las pantallas desde afuera es una medida técnica concreta y
+      verificable de protección de la confidencialidad. Suma a una política integral de seguridad
+      de la información, cubriendo el flanco visual que otras herramientas dejan abierto.
+    </p>
+    <p>
+      Si querés entender la solución técnica en detalle, leé nuestra
+      <a href="/privacidad-de-pantallas-en-oficinas/">guía de privacidad de pantallas en
+      oficinas</a>.
+    </p>
+    <p class="guia-nota">
+      <strong>Nota:</strong> este contenido es informativo y no constituye asesoramiento legal.
+      Para evaluar las obligaciones específicas de tu organización, consultá con un profesional.
+    </p>
+  </section>
+
+  <section id="fuentes" class="guia-seccion">
+    <h2>Fuentes</h2>
+    <ul class="guia-fuentes">
+      {fuentes.map((f) => (
+        <li>
+          <a href={f.url} target="_blank" rel="noopener">{f.titulo}</a> — {f.medio}
+        </li>
+      ))}
+    </ul>
+  </section>
+</GuiaLayout>

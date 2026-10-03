@@ -1,8 +1,9 @@
 // Sitemap generado en build. Las URLs absolutas salen de `site` en
 // astro.config.mjs, así que basta con configurar ahí el dominio final.
 import type { APIRoute } from 'astro';
+import { GUIAS } from '../data/guias';
 
-const RUTAS = ['/', '/privacidad-de-pantallas-en-oficinas/'];
+const RUTAS = ['/', ...GUIAS.map((g) => g.path)];
 
 export const GET: APIRoute = ({ site }) => {
   const hoy = new Date().toISOString().split('T')[0];
