@@ -1,16 +1,16 @@
 ---
 // Header / Nav sticky.
 import Logo from './Logo.astro';
+import { GUIAS } from '../data/guias';
 
 const NOMBRE_MARCA = 'Invision';
 
-const navLinks = [
+const linksAntes = [
   { href: '/#que-es', label: 'Qué es' },
   { href: '/#beneficios', label: 'Beneficios' },
   { href: '/#casos', label: 'Casos' },
-  { href: '/privacidad-de-pantallas-en-oficinas/', label: 'Guía' },
-  { href: '/#contacto', label: 'Contacto' },
 ];
+const linksDespues = [{ href: '/#contacto', label: 'Contacto' }];
 ---
 
 <header class="header" id="inicio">
@@ -34,7 +34,33 @@ const navLinks = [
 
     <nav class="header__nav" id="menu-principal" aria-label="Navegación principal">
       <ul class="header__links">
-        {navLinks.map((link) => (
+        {linksAntes.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))}
+        <li class="header__dropdown">
+          <button
+            class="header__dropdown-toggle"
+            id="guias-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="guias-submenu"
+          >
+            Guías
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+          </button>
+          <ul class="header__submenu" id="guias-submenu">
+            {GUIAS.map((g) => (
+              <li>
+                <a href={g.path}>{g.titulo}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        {linksDespues.map((link) => (
           <li>
             <a href={link.href}>{link.label}</a>
           </li>
@@ -115,6 +141,96 @@ const navLinks = [
     padding: 0.65rem 1.25rem;
   }
 
+  /* Submenú "Guías": se abre con clic (JS agrega .is-open) y, en desktop
+     con mouse, también al pasar por encima. */
+  .header__dropdown {
+    position: relative;
+  }
+
+  .header__dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: transparent;
+    border: 0;
+    padding: var(--sp-1) 0;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--color-texto-invertido);
+    opacity: 0.85;
+    transition: opacity var(--transition-base);
+  }
+
+  .header__dropdown-toggle:hover,
+  .header__dropdown.is-open .header__dropdown-toggle {
+    opacity: 1;
+  }
+
+  .header__dropdown-toggle svg {
+    transition: transform var(--transition-base);
+  }
+
+  .header__dropdown.is-open .header__dropdown-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .header__submenu {
+    display: none;
+  }
+
+  .header__dropdown.is-open .header__submenu {
+    display: block;
+  }
+
+  @media (min-width: 861px) {
+    .header__submenu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 300px;
+      margin-top: var(--sp-1);
+      padding: var(--sp-1);
+      background: var(--color-primario-800);
+      border: 1px solid rgba(248, 250, 252, 0.12);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Puente invisible para que el hover no se corte entre botón y panel */
+    .header__submenu::before {
+      content: '';
+      position: absolute;
+      inset: calc(-1 * var(--sp-1)) 0 auto;
+      height: var(--sp-1);
+    }
+
+    .header__submenu a {
+      display: block;
+      padding: 0.6rem var(--sp-2);
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .header__submenu a:hover {
+      background: rgba(248, 250, 252, 0.06);
+    }
+
+    .header__submenu li:first-child a {
+      font-weight: 600;
+    }
+  }
+
+  @media (min-width: 861px) and (hover: hover) {
+    .header__dropdown:hover .header__submenu {
+      display: block;
+    }
+
+    .header__dropdown:hover .header__dropdown-toggle svg {
+      transform: rotate(180deg);
+    }
+  }
+
   /* Mobile: menú colapsado en overlay */
   @media (max-width: 860px) {
     .header__toggle {
@@ -155,6 +271,22 @@ const navLinks = [
       border-bottom: 1px solid rgba(248, 250, 252, 0.08);
     }
 
+    .header__dropdown-toggle {
+      width: 100%;
+      justify-content: space-between;
+      padding: var(--sp-2) 0;
+      font-size: var(--fs-md);
+      border-bottom: 1px solid rgba(248, 250, 252, 0.08);
+    }
+
+    .header__submenu {
+      padding-left: var(--sp-2);
+    }
+
+    .header__submenu a {
+      font-size: var(--fs-base);
+    }
+
     .header__cta {
       width: 100%;
     }
@@ -182,6 +314,37 @@ const navLinks = [
         menu.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
       });
+    });
+  }
+
+  // Submenú "Guías"
+  const guiasToggle = document.getElementById('guias-toggle');
+  const dropdown = guiasToggle?.closest<HTMLElement>('.header__dropdown');
+
+  if (guiasToggle && dropdown) {
+    const setAbierto = (abierto: boolean) => {
+      dropdown.classList.toggle('is-open', abierto);
+      guiasToggle.setAttribute('aria-expanded', String(abierto));
+    };
+
+    guiasToggle.addEventListener('click', () => {
+      setAbierto(!dropdown.classList.contains('is-open'));
+    });
+
+    // Cerrar al hacer clic afuera, con Escape o al salir con Tab
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target as Node)) setAbierto(false);
+    });
+
+    dropdown.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dropdown.classList.contains('is-open')) {
+        setAbierto(false);
+        guiasToggle.focus();
+      }
+    });
+
+    dropdown.addEventListener('focusout', (e) => {
+      if (!dropdown.contains(e.relatedTarget as Node)) setAbierto(false);
     });
   }
 </script>
