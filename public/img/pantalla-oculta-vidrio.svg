@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111a2e"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <linearGradient id="vidrio" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.10"/>
+      <stop offset="0.5" stop-color="#22d3ee" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#fondo)"/>
+
+  <!-- Piso -->
+  <rect y="520" width="1200" height="155" fill="#172236"/>
+
+  <!-- Sala de reunión: mesa, sillas y personas -->
+  <rect x="300" y="430" width="600" height="22" rx="6" fill="#64748b"/>
+  <rect x="330" y="452" width="14" height="80" fill="#475569"/>
+  <rect x="856" y="452" width="14" height="80" fill="#475569"/>
+
+  <g fill="#334155">
+    <circle cx="410" cy="330" r="28"/>
+    <path d="M362 430c0-50 22-72 48-72s48 22 48 72z"/>
+    <circle cx="790" cy="330" r="28"/>
+    <path d="M742 430c0-50 22-72 48-72s48 22 48 72z"/>
+  </g>
+
+  <!-- Monitor en la pared: negro desde afuera -->
+  <rect x="470" y="150" width="260" height="150" rx="8" fill="#000" stroke="#475569" stroke-width="6"/>
+  <rect x="590" y="300" width="20" height="40" fill="#475569"/>
+  <!-- Notebook sobre la mesa: también negra -->
+  <path d="M560 430l12-56h96l12 56z" fill="#000" stroke="#475569" stroke-width="4"/>
+
+  <!-- Pared de vidrio con lámina -->
+  <rect x="120" y="70" width="960" height="470" fill="url(#vidrio)" stroke="#22d3ee" stroke-opacity="0.45" stroke-width="3"/>
+  <line x1="600" y1="70" x2="600" y2="540" stroke="#22d3ee" stroke-opacity="0.3" stroke-width="3"/>
+  <g stroke="#f8fafc" stroke-opacity="0.12" stroke-width="10" stroke-linecap="round">
+    <line x1="180" y1="200" x2="260" y2="120"/>
+    <line x1="200" y1="250" x2="300" y2="150"/>
+    <line x1="960" y1="230" x2="1040" y2="150"/>
+  </g>
+
+  <!-- Etiquetas -->
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" fill="#f8fafc">
+    <text x="600" y="610" text-anchor="middle" fill-opacity="0.85">Desde afuera: el ambiente se ve, las pantallas no</text>
+  </g>
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" letter-spacing="1.5" fill="#22d3ee">
+    <text x="140" y="104">FILM DE OCULTACIÓN</text>
+  </g>
+</svg>

@@ -2,7 +2,7 @@
 // astro.config.mjs, así que basta con configurar ahí el dominio final.
 import type { APIRoute } from 'astro';
 
-const RUTAS = ['/'];
+const RUTAS = ['/', '/privacidad-de-pantallas-en-oficinas/'];
 
 export const GET: APIRoute = ({ site }) => {
   const hoy = new Date().toISOString().split('T')[0];
